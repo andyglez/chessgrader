@@ -8,7 +8,6 @@ Implementar la inteligencia de un jugador de ajedrez.
 
 Deben descargar e instalar la biblioteca `python-chess`:
 
-+ ftp://lara.matcom.uh.cu/clases/IA/proyecto0
 + [Github](https://github.com/niklasf/python-chess)
 
 Esta biblioteca contiene la lógica del juego de ajedrez. Pueden (y deben) ver la interfaz que ofrece en [github](https://github.com/niklasf/python-chess)
@@ -18,15 +17,8 @@ Esta biblioteca contiene la lógica del juego de ajedrez. Pueden (y deben) ver l
     cd /path/to/python-chess
     python setup.py install
 
-Nota: Cada vez que se use `python` en esta ayuda se refiere a `python3`. No se a probado su correcto funcionamiento en `python2`.
+Nota: Cada vez que se use `python` en esta ayuda se refiere a `python3`. No se ha probado su correcto funcionamiento en `python2`.
 
-### chessgrader
-
-Pueden descargar el evaluador que vamos a estar usando para la competencia (y dar las notas al final) en http://lara.matcom.uh.cu:8000/MarX/chessgrader. El evaluador puede sufrir cambios sin embargo contiene esencialmente lo necesario para realizar un juego de ajedrez entre dos agentes.
-
-Nota: No se ha implementado ninguna interfaz visual para jugar contra una IA. Coming soon...
-
-Nota: Si encuentran un error comuníquenmelo en el [chat](http://chat.matcom.uh.cu/direct/MarX).
 
 ## Especificaciones
 
@@ -139,7 +131,3 @@ Ayuda sobre otros parámetros configurables:
 
     python run.py --help
 
-## Contacto
-
-+ [Canal de IA 2018](http://chat.matcom.uh.cu/channel/ia-18)
-+ [Marcelo @ chat.matcom](http://chat.matcom.uh.cu/direct/MarX)
