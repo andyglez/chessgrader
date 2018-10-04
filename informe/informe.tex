@@ -1,0 +1,97 @@
+\documentclass{llncs}
+
+%\usepackage{graphicx}
+%
+\usepackage{geometry} % to change the page dimensions
+\usepackage{multirow}
+
+
+\geometry{a4paper}
+
+\begin{document}
+
+
+\title{Jugador Artificial de Ajedrez}
+
+\author{Andy Gonz\'alez Pe\~na}
+
+\institute{MATCOM, Universidad de la Habana}
+\maketitle
+
+\begin{multicols}{2}[]
+
+\begin{abstract}
+
+Este trabajo representa un informe de proyecto en el que se presentan tres jugadores artificiales de ajedrez implementados
+seg\'un las t\'ecnicas de b\'usqueda adversarial en la rama de la Inteligencia Artificial.
+
+\end{abstract}
+
+\section{Introducci\'on}\label{sec:Introduction}
+
+El trabajo se ajusta a lo propuesto por el m\'odulo de extensi\'on de Python denominado \textbf{python-chess} para obtener
+el marco de acciones sobre las que los jugadores se mover\'an. Adem\'as, seg\'un la plantilla de jugador presente en \textbf{chessgrader}
+se obtiene la estructura de su funcionalidad.\\
+Los tres jugadores implementan el algoritmo de \textbf{minimax} como base de su razonamiento y una heur\'istica que informa o eval\'ua
+las condiciones del tablero luego de un n\'umero determinado que indica la profundidad de su an\'alisis.\\
+De manera general, las tres implementaciones se presentan parecidas, sin embargo difieren en algunos aspectos, intentando encontrar
+nuevos y mejores resultados.
+
+\section{Minimax}\label{sec:Minimax}
+
+La primera implementaci\'on se encuentra en el proyecto bajo el nombre de \textbf{raw}.\\
+La idea del algoritmo se presenta por su cuenta, es una b\'usqueda de adversarios en el que uno intenta maximizar su estado final, o ganar,
+y el otro pretende minimizar los estados del contrario separados por niveles en el \'arbol de la propia b\'usqueda.\\
+Entonces, se define el estado de un tablero justo antes de la jugada y para el jugador de turno se intentar\'a encontrar su jugada \'optima,
+es decir, de todas las posibles jugadas se tomar\'a la mejor y se har\'a; sin embargo, esto presenta un gran inconveniente, el ajedrez es un
+juego de mesa, con 16 fichas iniciales por jugador y 64 casillas por las que moverse con lo cual es imposible analizar todo el juego hasta el
+estado anhelado de utilidad o sea, ganar.\\
+De tal manera, el \'arbol de b\'usqueda ser\'a podado hasta un nivel de profundidad determinado para que el algoritmo sea capaz de concluir
+en un tiempo arbitrario, es decir, antes de mover alguna ficha, el jugador buscar\'a unos pasos adelante y evaluar\'a el tablero seg\'un la
+funci\'on heur\'istica y decidir\'a por la de mayor puntuaci\'on.\\
+Se encontr\'o que, seg\'un las reglas establecidas por la orden del proyecto, el algoritmo no realiza todas sus operaciones en el tiempo arbitrario
+para cuando intenta analizar un tercer paso adelante, entonces este primer jugador analizar\'a dos jugadas por delante.
+
+
+\section{Multi-hilos}\label{sec:Multi-hilos}
+
+La segunda implementaci\'on se encuentra en el proyecto bajo el nombre de \textbf{mt}.\\
+La filosof\'ia algor\'itmica es la misma, o sea, de acuerdo con la implementaci\'on anterior de b\'usqueda adversarial, sin embargo se pretende
+ganar en eficiencia separando cada rama del \'arbol en un hilo de ejecuci\'on diferente, esto solamente al primer nivel para evitar sobrecarga.\\
+Se obtuvo los mismos resultados de manera general, y solamente permite analizar hasta dos pasos adelante de su estado vigente.\\
+
+\section{Poda Alpha-Beta}\label{sec:Alpha-Beta}
+
+La tercera implementaci\'on se encuentra en el proyecto bajo el nombre de \textbf{ab}.\\
+Luego de analizar los resultados con las implementaciones anteriores se obtiene que el \'arbol de b\'usqueda es inmenso, espec\'ificamente
+el ajedrez y es, por tanto, que se propone la poda Alpha-Beta.\\
+El algoritmo es b\'asicamente el mismo que el \textbf{minimax}, con la diferencia de que una vez que encuentra un estado del tablero que su valor de
+utilidad es $X$ y dicho valor sube en el \'arbol, luego al comenzar la b\'usqueda en el pr\'oximo nodo hijo, si se encuentra que en su rama m\'as a la
+izquierda devuelve una utilidad menor que $X$ y tal nodo hijo est\'a minimizando, o es mayor que $X$ y est\'a maximizando, entonces los siguientes
+hijos de dicho nodo ser\'an podados y descartados.\\
+Con esta ligera modificaci\'on se logra eliminar numerosas ramificaciones y, en consecuencia, optimizar la demora en ejecuci\'on del an\'alisis de juego.
+Es as\'i, que este jugador se permite analizar tres jugadas hacia adelante, sin sobrecosto de tiempo.
+
+\section{Heur\'istica}
+
+Todas las implementaciones utilizan la misma funci\'on de utilidad para evaluar un tablero seg\'un su estado.\\
+Consta de dos funciones, una primaria que se compone de una combinaci\'on lineal de las diferencias de fichas entre los jugadores, donde los coeficientes
+se han prefijado de acuerdo con los est\'andares.
+\\La funci\'on secundaria es simplemente una cuenta de cercan\'ia entre los peones m\'as avanzados. Se les define en tal orden seg\'un criterios generales.
+
+\section{Conclusiones}\label{sec:Conclusiones}
+
+Ha sido de gran inter\'es el desarrollo de este trabajo present\'andose como una pauta para un nuevo camino hacia toda una rama de las Ciencias de la
+Computaci\'on, con lo cual se ha tenido en cuenta varios conocimientos previos como ejercitaci\'on fundamental y los nuevos temas adquiridos para
+la continua superaci\'on del perfil profesional.
+
+
+\end{multicols}
+\begin{thebibliography}{1}
+
+\bibitem{Berkeley}
+Lectures in Artificial Intelligence, Course CS188, Berkeley, 2014.
+
+\end{thebibliography}
+
+\end{document}
